@@ -24,20 +24,14 @@ angular.module('charlierproctor.angular-planets', []).
 		var light = new THREE.AmbientLight( 0xffffff ); // soft white light
 		scope.scene.add( light );
 
-		// create and add the sun to the scene
-		var sun = new THREE.Mesh(
-			new THREE.SphereGeometry( scope.sun.radius, 32, 32 ), 	
-			new THREE.MeshLambertMaterial({ color: scope.sun.color }))
-		scope.scene.add(sun)
-
 		var years = 0;
 		function render() {
 			requestAnimationFrame( render );
 	
 			scope.planets.map(function(planet){
 
-				// calculate the angle
-				var theta = 2 * Math.PI * years / planet.orbitalPeriod
+				// calculate the angle (set to 0 if it's the sun)
+				var theta = planet.orbitalPeriod ? 2 * Math.PI * years / planet.orbitalPeriod : 0
 
 				// update the planets position
 				planet.planet.position.set(
@@ -71,7 +65,7 @@ angular.module('charlierproctor.angular-planets', []).
 				new THREE.SphereGeometry( planetRadius, 32, 32 ), 
 				new THREE.MeshLambertMaterial({ color: color })
 			)
-			
+
 			// add this planet to the scene
 			$scope.scene.add(planet)
 
@@ -81,7 +75,6 @@ angular.module('charlierproctor.angular-planets', []).
 				orbitalPeriod: orbitalPeriod(orbitalRadius),
 				planet: planet
 			})
-			console.log($scope.planets)
   		}
   	}
 
