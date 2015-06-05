@@ -6,7 +6,7 @@ angular.module('charlierproctor.angular-planets', []).
   		return Math.sqrt(Math.pow(orbitalRadius,3))
   	}
 
-  	function link(scope, element, attrs){
+  	function link(scope, element){
 
   		// create the scene, camera, renderer
 		var camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 0.1, 1000 );
@@ -39,15 +39,15 @@ angular.module('charlierproctor.angular-planets', []).
 
 				// update the planets position
 				planet.planet.position.set(
-					attrs.scale * planet.orbitalRadius * Math.cos(theta),
-					attrs.scale * planet.orbitalRadius * Math.sin(theta),
+					element.attr("scale") * planet.orbitalRadius * Math.cos(theta),
+					element.attr("scale") * planet.orbitalRadius * Math.sin(theta),
 					0)
 			})
 
 			renderer.render( scope.scene, camera );
 
 			// attrs.speed years passes every second, assuming 60 fps
-			years += attrs.speed/60;
+			years += element.attr("speed")/60;
 		}
 		render();
   	}
