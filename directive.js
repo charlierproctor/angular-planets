@@ -12,22 +12,18 @@ angular.module('charlierproctor.angular-planets', []).
 		var light = new THREE.AmbientLight( 0xffffff ); // soft white light
 		scene.add( light );
 
-		var format = [
-			{
-				geometry: new THREE.SphereGeometry( 10, 32, 32 ),
-				material: new THREE.MeshLambertMaterial({ color:0x0000ff })
-			},
-			{
-				geometry: new THREE.SphereGeometry( 10, 32, 32 ),
-				material: new THREE.MeshLambertMaterial({ color:0x00ff00 })
-			}
+		var spheres = [
+			new THREE.Mesh( 
+				new THREE.SphereGeometry( 10, 32, 32 ), 
+				new THREE.MeshLambertMaterial({ color:0x0000ff })
+			),
+			new THREE.Mesh(
+				new THREE.SphereGeometry( 10, 32, 32 ),
+				new THREE.MeshLambertMaterial({ color:0x00ff00 })
+			)
 		]
-		var spheres = []
-		for (var i = 0; i < format.length; i++) {
-			var obj = format[i];
-			var sphere = new THREE.Mesh( obj.geometry, obj.material );
-			spheres.push(sphere)
-			scene.add( sphere )
+		for (var i = 0; i < spheres.length; i++) {
+			scene.add( spheres[i] )
 		};
 
 		renderer.setSize( window.innerWidth, window.innerHeight );
