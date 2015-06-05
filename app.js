@@ -11,22 +11,6 @@ angular.module('ngPlanetsDemo', [
 		radius: 20
 	}
 
-	$scope.planets = [
-		{
-			color: 0xff0000,
-			planetRadius: 10,
-			orbitalRadius: 1
-		},
-		{
-			color: 0x00ff00,
-			planetRadius: 10,
-			orbitalRadius: 2
-		},
-		{
-			color: 0x0000ff,
-			planetRadius: 10,
-			orbitalRadius: 3
-		}
-	]
+	$scope.planets = []
 
 }]);

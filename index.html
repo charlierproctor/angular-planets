@@ -12,7 +12,9 @@
 	<div ng-controller="AppCtrl">
 		<ng-planets speed="1" scale="25">
 		<!-- speed is years / second. scale is pixels / AU.  -->
-			<ng-planet color="blue"></ng-planet>
+			<ng-planet color="0xff0000" planet-radius="10" orbital-radius="1"></ng-planet>
+			<ng-planet color="0x00ff00" planet-radius="10" orbital-radius="2"></ng-planet>
+			<ng-planet color="0x0000ff" planet-radius="10" orbital-radius="3"></ng-planet>
 		</ng-planets>
 	</div>
 	<script src="bower_components/angular/angular.js"></script>

@@ -6,15 +6,15 @@ angular.module('charlierproctor.angular-planets', []).
   		return Math.sqrt(Math.pow(orbitalRadius,3))
   	}
 
-  	function link(scope, element, attrs){
+  	function link($scope, $element, attrs){
 
   		// create the scene, camera, renderer
-  		var scene = new THREE.Scene();
+  		$scope.scene = new THREE.Scene();
 		var camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 0.1, 1000 );
 		var renderer = new THREE.WebGLRenderer();
 		
 		renderer.setSize( window.innerWidth, window.innerHeight );
-		element.append(renderer.domElement)
+		$element.append(renderer.domElement)
 
 		// set the camera position / angle
 		camera.position.y = -100;
@@ -23,38 +23,19 @@ angular.module('charlierproctor.angular-planets', []).
 
 		// some ambient light
 		var light = new THREE.AmbientLight( 0xffffff ); // soft white light
-		scene.add( light );
+		$scope.scene.add( light );
 
 		// create and add the sun to the scene
 		var sun = new THREE.Mesh(
-			new THREE.SphereGeometry( scope.sun.radius, 32, 32 ), 	
-			new THREE.MeshLambertMaterial({ color: scope.sun.color }))
-		scene.add(sun)
-
-		// map over all the planets
-		for (var i = 0; i < scope.planets.length; i++) {
-			var data = scope.planets[i]
-
-			// create the planet and add it to the scene
-			var planet = new THREE.Mesh( 
-				new THREE.SphereGeometry( data.planetRadius, 32, 32 ), 
-				new THREE.MeshLambertMaterial({ color: data.color })
-			)
-			scene.add(planet)
-
-			// update the scope.planets variable
-			scope.planets[i] = {
-				orbitalRadius: data.orbitalRadius,
-				orbitalPeriod: orbitalPeriod(data.orbitalRadius),
-				planet: planet
-			}
-		};
+			new THREE.SphereGeometry( $scope.sun.radius, 32, 32 ), 	
+			new THREE.MeshLambertMaterial({ color: $scope.sun.color }))
+		$scope.scene.add(sun)
 
 		var years = 0;
 		function render() {
 			requestAnimationFrame( render );
 	
-			scope.planets.map(function(planet){
+			$scope.planets.map(function(planet){
 
 				// calculate the angle
 				var theta = 2 * Math.PI * years / planet.orbitalPeriod
@@ -66,7 +47,7 @@ angular.module('charlierproctor.angular-planets', []).
 					0)
 			})
 
-			renderer.render( scene, camera );
+			renderer.render( $scope.scene, camera );
 
 			// attrs.speed years passes every second, assuming 60 fps
 			years += attrs.speed/60;
@@ -74,17 +55,42 @@ angular.module('charlierproctor.angular-planets', []).
 		render();
   	}
 
+  	function controller($scope, $element){
+  		this.addPlanet = function(attrs){
+			
+			var orbitalRadius = parseFloat(attrs.orbitalRadius)
+			var planetRadius = parseFloat(attrs.planetRadius)
+  			
+  			// create the planet and add it to the scene
+			var planet = new THREE.Mesh( 
+				new THREE.SphereGeometry( planetRadius, 32, 32 ), 
+				new THREE.MeshLambertMaterial({ color: attrs.color })
+			)
+			// $scope.scene.add(planet)
+
+			// update the $scope.planets variable
+			$scope.planets.push({
+				orbitalRadius: orbitalRadius,
+				orbitalPeriod: orbitalPeriod(orbitalRadius),
+				planet: planet
+			})
+			console.log($scope.planets)
+  		}
+  	}
+
     return {
     	restrict: 'E',
-    	link: link
+    	link: link,
+    	controller: controller
     };
   }).
 directive('ngPlanet',function(){
 	return {
 		restrict: 'E',
+		require: '^ngPlanets',
 		transclude: true,
-		link: function(scope, element, attrs){
-			scope.sun = "charlie"
+		link: function($scope, $element, attrs, controller){
+			controller.addPlanet(attrs)
 		}
 	}
 })
