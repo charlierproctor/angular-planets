@@ -61,14 +61,18 @@ angular.module('charlierproctor.angular-planets', []).
 
   		this.addPlanet = function(attrs){
 			
+			// parse the data out of attrs
 			var orbitalRadius = parseFloat(attrs.orbitalRadius)
 			var planetRadius = parseFloat(attrs.planetRadius)
-  			
+  			var color = parseInt(attrs.color)
+
   			// create the planet and add it to the scene
 			var planet = new THREE.Mesh( 
 				new THREE.SphereGeometry( planetRadius, 32, 32 ), 
-				new THREE.MeshLambertMaterial({ color: attrs.color })
+				new THREE.MeshLambertMaterial({ color: color })
 			)
+			
+			// add this planet to the scene
 			$scope.scene.add(planet)
 
 			// update the $scope.planets variable
