@@ -1,5 +1,11 @@
 angular.module('charlierproctor.angular-planets', []).
   directive('ngPlanets', function () {
+
+  	// given orbitalRadius in AU, returns orbitalPeriod in years
+  	function orbitalPeriod(speed,orbitalRadius){
+  		return Math.sqrt(speed*Math.pow(orbitalRadius,3))
+  	}
+
   	function link(scope, element, attrs){
   		var scene = new THREE.Scene();
 		var camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 0.1, 1000 );

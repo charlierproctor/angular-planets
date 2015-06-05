@@ -12,21 +12,21 @@ angular.module('ngPlanetsDemo', [
 	}
 
 	$scope.speed = 1
-	
+
 	$scope.planets = [
 		{
 			color: 0xff0000,
-			radius: 10,
+			planetRadius: 10,
 			orbitalRadius: 25
 		},
 		{
 			color: 0x00ff00,
-			radius: 10,
+			planetRadius: 10,
 			orbitalRadius: 50
 		},
 		{
 			color: 0x0000ff,
-			radius: 10,
+			planetRadius: 10,
 			orbitalRadius: 75
 		}
 	]
