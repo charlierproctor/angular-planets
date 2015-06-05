@@ -73,8 +73,31 @@ angular.module('charlierproctor.angular-planets', []).
 		}
 		render();
   	}
+
+  	function controller($scope,$element){
+  		this.addSun = function(sun){
+  			// $scope.sun = sun
+  			console.log($scope.sun)
+  		}
+  	}
     return {
     	restrict: 'E',
-    	link: link
+    	link: link,
+    	controller: controller
     };
-  });
+  }).
+directive('ngSun',function(){
+	return {
+		restrict: 'E',
+		require: '^ngPlanets',
+		scope: {
+			color: "@",
+			radius: "@"
+		}, 
+		link: function(scope, element, attrs, ngPlanetsController){
+			// console.log(scope.color)
+			scope.color = "red"
+			ngPlanetsController.addSun("red")
+		}
+	}
+})

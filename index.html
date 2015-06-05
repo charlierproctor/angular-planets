@@ -10,7 +10,9 @@
 </head>
 <body ng-app="ngPlanetsDemo">
 	<div ng-controller="AppCtrl">
-		<ng-planets></ng-planets>
+		<ng-planets speed="1">
+			<ng-sun color="blue"></ng-sun>
+		</ng-planets>
 	</div>
 	<script src="bower_components/angular/angular.js"></script>
 	<script src="bower_components/three.js/three.min.js"></script>
