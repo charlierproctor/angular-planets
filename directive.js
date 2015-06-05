@@ -2,8 +2,8 @@ angular.module('charlierproctor.angular-planets', []).
   directive('ngPlanets', function () {
 
   	// given orbitalRadius in AU, returns orbitalPeriod in years
-  	function orbitalPeriod(speed,orbitalRadius){
-  		return Math.sqrt(speed*Math.pow(orbitalRadius,3))
+  	function orbitalPeriod(orbitalRadius){
+  		return Math.sqrt(Math.pow(orbitalRadius,3))
   	}
 
   	function link(scope, element, attrs){
@@ -19,19 +19,20 @@ angular.module('charlierproctor.angular-planets', []).
 		scene.add( light );
 
 		var sun = new THREE.Mesh(
-			new THREE.SphereGeometry( $scope.sun.radius, 32, 32 ), 	
-			new THREE.MeshLambertMaterial({ color: $scope.sun.color }))
+			new THREE.SphereGeometry( scope.sun.radius, 32, 32 ), 	
+			new THREE.MeshLambertMaterial({ color: scope.sun.color }))
 		scene.add(sun)
 
-		for (var i = 0; i < $scope.planets.length; i++) {
-			var data = $scope.planets[i]
+		for (var i = 0; i < scope.planets.length; i++) {
+			var data = scope.planets[i]
 			var planet = new THREE.Mesh( 
 				new THREE.SphereGeometry( data.planetRadius, 32, 32 ), 
 				new THREE.MeshLambertMaterial({ color: data.color })
 			)
-			$scope.planets[i] = {
+			scene.add(planet)
+			scope.planets[i] = {
 				orbitalRadius: data.orbitalRadius,
-				orbitalPeriod: orbitalPeriod($scope.speed, data.orbitalRadius),
+				orbitalPeriod: orbitalPeriod(data.orbitalRadius),
 				planet: planet
 			}
 		};
@@ -39,14 +40,23 @@ angular.module('charlierproctor.angular-planets', []).
 		renderer.setSize( window.innerWidth, window.innerHeight );
 		element.append(renderer.domElement)
 
-		var t = 0;
+		var years = 0;
 		function render() {
 			requestAnimationFrame( render );
+	
+			scope.planets.map(function(planet){
+				var theta = 2 * Math.PI * years / planet.orbitalPeriod
 
-			spheres[1].position.set(50*Math.cos(t/100), 50*Math.sin(t/100), 0)
+				planet.planet.position.set(
+					scope.scale * planet.orbitalRadius * Math.cos(theta),
+					scope.scale * planet.orbitalRadius * Math.sin(theta),
+					0)
+			})
 
 			renderer.render( scene, camera );
-			t++;
+
+			// one year passes every second
+			years += scope.speed/60;
 		}
 		render();
   	}
