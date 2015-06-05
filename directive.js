@@ -6,15 +6,15 @@ angular.module('charlierproctor.angular-planets', []).
   		return Math.sqrt(Math.pow(orbitalRadius,3))
   	}
 
-  	function link($scope, $element, attrs){
+  	function link(scope, element, attrs){
 
   		// create the scene, camera, renderer
-  		$scope.scene = new THREE.Scene();
+  		scope.scene = new THREE.Scene();
 		var camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 0.1, 1000 );
 		var renderer = new THREE.WebGLRenderer();
 		
 		renderer.setSize( window.innerWidth, window.innerHeight );
-		$element.append(renderer.domElement)
+		element.append(renderer.domElement)
 
 		// set the camera position / angle
 		camera.position.y = -100;
@@ -23,19 +23,19 @@ angular.module('charlierproctor.angular-planets', []).
 
 		// some ambient light
 		var light = new THREE.AmbientLight( 0xffffff ); // soft white light
-		$scope.scene.add( light );
+		scope.scene.add( light );
 
 		// create and add the sun to the scene
 		var sun = new THREE.Mesh(
-			new THREE.SphereGeometry( $scope.sun.radius, 32, 32 ), 	
-			new THREE.MeshLambertMaterial({ color: $scope.sun.color }))
-		$scope.scene.add(sun)
+			new THREE.SphereGeometry( scope.sun.radius, 32, 32 ), 	
+			new THREE.MeshLambertMaterial({ color: scope.sun.color }))
+		scope.scene.add(sun)
 
 		var years = 0;
 		function render() {
 			requestAnimationFrame( render );
 	
-			$scope.planets.map(function(planet){
+			scope.planets.map(function(planet){
 
 				// calculate the angle
 				var theta = 2 * Math.PI * years / planet.orbitalPeriod
@@ -47,7 +47,7 @@ angular.module('charlierproctor.angular-planets', []).
 					0)
 			})
 
-			renderer.render( $scope.scene, camera );
+			renderer.render( scope.scene, camera );
 
 			// attrs.speed years passes every second, assuming 60 fps
 			years += attrs.speed/60;
