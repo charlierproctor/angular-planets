@@ -26,6 +26,13 @@ angular.module('charlierproctor.angular-planets', []).
 			scene.add( spheres[i] )
 		};
 
+		var geo = new THREE.TextGeometry("Charlie", {
+			height:5
+		})
+		var mat = new THREE.MeshLambertMaterial({ color: 0xff0000 })
+		var text = new THREE.Mesh(geo,mat)
+		scene.add(text)
+
 		renderer.setSize( window.innerWidth, window.innerHeight );
 		element.append(renderer.domElement)
 
