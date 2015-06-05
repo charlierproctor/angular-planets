@@ -9,16 +9,26 @@ angular.module('charlierproctor.angular-planets', []).
 		camera.position.z = 100;
 		camera.lookAt(new THREE.Vector3(0,0,0))
 
-		var geometry = new THREE.SphereGeometry( 10, 32, 32 );
-		var material = new THREE.MeshDepthMaterial();
-		var center = new THREE.Mesh( geometry, material );
-		center.position.set(0, 0, 0)
-		scene.add( center );
+		var light = new THREE.AmbientLight( 0xffffff ); // soft white light
+		scene.add( light );
 
-		var geometry = new THREE.SphereGeometry( 10, 32, 32 );
-		var material = new THREE.MeshDepthMaterial();
-		var sphere = new THREE.Mesh( geometry, material );
-		scene.add( sphere );
+		var format = [
+			{
+				geometry: new THREE.SphereGeometry( 10, 32, 32 ),
+				material: new THREE.MeshLambertMaterial({ color:0x0000ff })
+			},
+			{
+				geometry: new THREE.SphereGeometry( 10, 32, 32 ),
+				material: new THREE.MeshLambertMaterial({ color:0x00ff00 })
+			}
+		]
+		var spheres = []
+		for (var i = 0; i < format.length; i++) {
+			var obj = format[i];
+			var sphere = new THREE.Mesh( obj.geometry, obj.material );
+			spheres.push(sphere)
+			scene.add( sphere )
+		};
 
 		renderer.setSize( window.innerWidth, window.innerHeight );
 		element.append(renderer.domElement)
@@ -27,7 +37,7 @@ angular.module('charlierproctor.angular-planets', []).
 		function render() {
 			requestAnimationFrame( render );
 
-			sphere.position.set(50*Math.cos(t/100), 50*Math.sin(t/100), 0)
+			spheres[1].position.set(50*Math.cos(t/100), 50*Math.sin(t/100), 0)
 
 			renderer.render( scene, camera );
 			t++;
