@@ -1,9 +1,11 @@
 'use strict';
 
-angular.module('ngPlanetsDemo', [])
+angular.module('ngPlanetsDemo', [
+	'charlierproctor.angular-planets'
+])
 
-  .controller('AppCtrl', ['$scope', function ($scope) {
+.controller('AppCtrl', ['$scope', function ($scope) {
 
-    $scope.test = "Lorem ipsum dolor sit amet, consectetuer adipiscing elit.";
+	$scope.test = "Lorem ipsum dolor sit amet, consectetuer adipiscing elit.";
 
-  }]);
+}]);

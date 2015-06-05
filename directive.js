@@ -1,4 +1,10 @@
 angular.module('charlierproctor.angular-planets', []).
   directive('ngPlanets', function () {
-    // implementation goes here
+  	function link(scope, element, attrs){
+  		console.log("hi there")
+  	}
+    return {
+    	restrict: 'E',
+    	link: link
+    };
   });
