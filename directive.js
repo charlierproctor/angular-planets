@@ -61,15 +61,15 @@ angular.module('charlierproctor.angular-planets', []).
 
 				// update the planets position
 				planet.planet.position.set(
-					scope.scale * planet.orbitalRadius * Math.cos(theta),
-					scope.scale * planet.orbitalRadius * Math.sin(theta),
+					attrs.scale * planet.orbitalRadius * Math.cos(theta),
+					attrs.scale * planet.orbitalRadius * Math.sin(theta),
 					0)
 			})
 
 			renderer.render( scene, camera );
 
-			// scope.speed years passes every second, assuming 60 fps
-			years += scope.speed/60;
+			// attrs.speed years passes every second, assuming 60 fps
+			years += attrs.speed/60;
 		}
 		render();
   	}

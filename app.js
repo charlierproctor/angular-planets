@@ -11,12 +11,6 @@ angular.module('ngPlanetsDemo', [
 		radius: 20
 	}
 
-	// years per second
-	// $scope.speed = 1
-
-	// pixels per AU
-	$scope.scale = 25
-
 	$scope.planets = [
 		{
 			color: 0xff0000,
