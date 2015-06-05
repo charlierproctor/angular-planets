@@ -75,7 +75,7 @@ angular.module('charlierproctor.angular-planets', []).
   	}
 
   	function controller($scope,$element){
-  		this.addSun = function(sun){
+  		this.addPlanet = function(sun){
   			// $scope.sun = sun
   			console.log($scope.sun)
   		}
@@ -86,18 +86,12 @@ angular.module('charlierproctor.angular-planets', []).
     	controller: controller
     };
   }).
-directive('ngSun',function(){
+directive('ngPlanet',function(){
 	return {
 		restrict: 'E',
 		require: '^ngPlanets',
-		scope: {
-			color: "@",
-			radius: "@"
-		}, 
 		link: function(scope, element, attrs, ngPlanetsController){
-			// console.log(scope.color)
-			scope.color = "red"
-			ngPlanetsController.addSun("red")
+			ngPlanetsController.addPlanet(attrs)
 		}
 	}
 })
