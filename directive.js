@@ -21,8 +21,12 @@ angular.module('charlierproctor.angular-planets', []).
 		camera.lookAt(new THREE.Vector3(0,0,0))
 
 		// some ambient light
-		var light = new THREE.AmbientLight( 0xffffff ); // soft white light
-		scope.scene.add( light );
+		var ambientLight = new THREE.AmbientLight( 0xffffff ); 
+		scope.scene.add( ambientLight );
+
+		var pointLight = new THREE.PointLight( 0xffffff, 1, 0 );
+		pointLight.position.set( 100, 100, 100 );
+		scope.scene.add( pointLight );
 
 		var years = 0;
 		function render() {
