@@ -18,26 +18,23 @@ angular.module('charlierproctor.angular-planets', []).
 		var light = new THREE.AmbientLight( 0xffffff ); // soft white light
 		scene.add( light );
 
-		var spheres = [
-			new THREE.Mesh( 
-				new THREE.SphereGeometry( 10, 32, 32 ), 
-				new THREE.MeshLambertMaterial({ color:0x0000ff })
-			),
-			new THREE.Mesh(
-				new THREE.SphereGeometry( 10, 32, 32 ),
-				new THREE.MeshLambertMaterial({ color:0x00ff00 })
-			)
-		]
-		for (var i = 0; i < spheres.length; i++) {
-			scene.add( spheres[i] )
-		};
+		var sun = new THREE.Mesh(
+			new THREE.SphereGeometry( $scope.sun.radius, 32, 32 ), 	
+			new THREE.MeshLambertMaterial({ color: $scope.sun.color }))
+		scene.add(sun)
 
-		var geo = new THREE.TextGeometry("Charlie", {
-			height:5
-		})
-		var mat = new THREE.MeshLambertMaterial({ color: 0xff0000 })
-		var text = new THREE.Mesh(geo,mat)
-		scene.add(text)
+		for (var i = 0; i < $scope.planets.length; i++) {
+			var data = $scope.planets[i]
+			var planet = new THREE.Mesh( 
+				new THREE.SphereGeometry( data.planetRadius, 32, 32 ), 
+				new THREE.MeshLambertMaterial({ color: data.color })
+			)
+			$scope.planets[i] = {
+				orbitalRadius: data.orbitalRadius,
+				orbitalPeriod: orbitalPeriod($scope.speed, data.orbitalRadius),
+				planet: planet
+			}
+		};
 
 		renderer.setSize( window.innerWidth, window.innerHeight );
 		element.append(renderer.domElement)
