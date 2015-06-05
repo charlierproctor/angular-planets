@@ -11,6 +11,4 @@ angular.module('ngPlanetsDemo', [
 		radius: 20
 	}
 
-	$scope.planets = []
-
 }]);

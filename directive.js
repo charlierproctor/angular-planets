@@ -9,7 +9,6 @@ angular.module('charlierproctor.angular-planets', []).
   	function link(scope, element, attrs){
 
   		// create the scene, camera, renderer
-  		scope.scene = new THREE.Scene();
 		var camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 0.1, 1000 );
 		var renderer = new THREE.WebGLRenderer();
 		
@@ -56,6 +55,10 @@ angular.module('charlierproctor.angular-planets', []).
   	}
 
   	function controller($scope, $element){
+  		
+  		$scope.planets = []
+  		$scope.scene = new THREE.Scene();
+
   		this.addPlanet = function(attrs){
 			
 			var orbitalRadius = parseFloat(attrs.orbitalRadius)
@@ -66,7 +69,7 @@ angular.module('charlierproctor.angular-planets', []).
 				new THREE.SphereGeometry( planetRadius, 32, 32 ), 
 				new THREE.MeshLambertMaterial({ color: attrs.color })
 			)
-			// $scope.scene.add(planet)
+			$scope.scene.add(planet)
 
 			// update the $scope.planets variable
 			$scope.planets.push({
