@@ -6,6 +6,29 @@ angular.module('ngPlanetsDemo', [
 
 .controller('AppCtrl', ['$scope', function ($scope) {
 
-	$scope.test = "Lorem ipsum dolor sit amet, consectetuer adipiscing elit.";
+	$scope.sun = {
+		color: 0x0000ff,
+		radius: 20
+	}
+
+	$scope.speed = 1
+	
+	$scope.planets = [
+		{
+			color: 0xff0000,
+			radius: 10,
+			orbitalRadius: 25
+		},
+		{
+			color: 0x00ff00,
+			radius: 10,
+			orbitalRadius: 50
+		},
+		{
+			color: 0x0000ff,
+			radius: 10,
+			orbitalRadius: 75
+		}
+	]
 
 }]);
