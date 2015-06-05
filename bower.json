@@ -1,0 +1,16 @@
+{
+  "name": "angular-planets",
+  "version": "0.0.0",
+  "authors": [
+    "Charlie Proctor <charlie@charlieproctor.com>"
+  ],
+  "main": "directive.js",
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
