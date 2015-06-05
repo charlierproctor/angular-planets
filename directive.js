@@ -74,24 +74,17 @@ angular.module('charlierproctor.angular-planets', []).
 		render();
   	}
 
-  	function controller($scope,$element){
-  		this.addPlanet = function(sun){
-  			// $scope.sun = sun
-  			console.log($scope.sun)
-  		}
-  	}
     return {
     	restrict: 'E',
-    	link: link,
-    	controller: controller
+    	link: link
     };
   }).
 directive('ngPlanet',function(){
 	return {
 		restrict: 'E',
-		require: '^ngPlanets',
-		link: function(scope, element, attrs, ngPlanetsController){
-			ngPlanetsController.addPlanet(attrs)
+		transclude: true,
+		link: function(scope, element, attrs){
+			scope.sun = "charlie"
 		}
 	}
 })

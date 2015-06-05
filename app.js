@@ -12,7 +12,7 @@ angular.module('ngPlanetsDemo', [
 	}
 
 	// years per second
-	$scope.speed = 1
+	// $scope.speed = 1
 
 	// pixels per AU
 	$scope.scale = 25
