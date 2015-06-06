@@ -4,17 +4,13 @@
 	<title>angular-planets</title>
 	<style type="text/css">
 		body {
-			/*background-color: black;*/
-		}
-		div {
-			height: 500px;
-			width: 500px;
+			background-color: black;
 		}
 	</style>
 </head>
 <body ng-app="ngPlanetsDemo">
 	<div ng-controller="AppCtrl">
-		<ng-planets height="500" width="500" speed="1" scale="25">
+		<ng-planets height="{{height}}" width="{{width}}" speed="1" scale="25">
 		<!-- speed is years / second. scale is pixels / AU.  -->
 			<ng-planet color="0xFF0000" planet-radius="10" orbital-radius="0"></ng-planet>
 			<ng-planet color="0xE0E0E0" planet-radius="10" orbital-radius="0.5"></ng-planet>
