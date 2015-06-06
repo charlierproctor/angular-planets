@@ -9,11 +9,24 @@ angular.module('charlierproctor.angular-planets', []).
   	function link(scope, element){
 
   		// create the scene, camera, renderer
-		var camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 0.1, 1000 );
+		var camera = new THREE.PerspectiveCamera( 75, element.attr("width") / element.attr("height"), 0.1, 1000 );
 		var renderer = new THREE.WebGLRenderer();
 		
-		renderer.setSize( window.innerWidth, window.innerHeight );
 		element.append(renderer.domElement)
+
+		// watch for changes to the height / width
+		scope.$watchGroup([function(){
+			return element.attr("width")
+		}, function(){
+			return element.attr("height")
+		}], function(){
+			// set the size of the renderer
+			renderer.setSize( element.attr("width"), element.attr("height") );
+
+			// and update the camera
+			camera.aspect = element.attr("width") / element.attr("height")
+			camera.updateProjectionMatrix()
+		})
 
 		// set the camera position / angle
 		camera.position.y = -100;
