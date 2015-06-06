@@ -73,17 +73,12 @@ angular.module('charlierproctor.angular-planets', []).
 			// add this planet to the scene
 			$scope.scene.add(planet)
 
-			// create the object
-			var obj = {
+			// update the $scope.planets variable
+			$scope.planets.push({
 				orbitalRadius: orbitalRadius,
 				orbitalPeriod: orbitalPeriod(orbitalRadius),
 				planet: planet
-			}
-
-			// update the $scope.planets variable
-			$scope.planets.push(obj)
-
-			return obj
+			})
   		}
   	}
 
@@ -98,33 +93,8 @@ directive('ngPlanet',function(){
 		restrict: 'E',
 		require: '^ngPlanets',
 		transclude: true,
-		link: function(scope, element, attrs, controller){
-			var planet = controller.addPlanet(attrs)
-			planet.element = element
-			
-			scope.$watch(function(){
-				return element.attr("color")
-			}, function(value){
-				planet.planet.material.color.set(parseInt(value))
-			})
-
-			scope.$watch(function(){
-				return element.attr("planet-radius")
-			}, function(value){
-				var scale = value / planet.planet.geometry.parameters.radius
-				planet.planet.scale.x *= scale
-				planet.planet.scale.y *= scale
-				planet.planet.scale.z *= scale
-			})
-
-			scope.$watch(function(){
-				return element.attr("orbital-radius")
-			}, function(value){
-				planet.orbitalRadius = parseFloat(value)
-			})
-
-			// scope.scene.remove(planet.planet)
-			// planet.element.attr("planet-radius","20")
+		link: function($scope, $element, attrs, controller){
+			controller.addPlanet(attrs)
 		}
 	}
 })
