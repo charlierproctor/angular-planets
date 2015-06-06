@@ -9,7 +9,7 @@ angular.module('charlierproctor.angular-planets', []).
   	function link(scope, element){
 
   		// create the scene, camera, renderer
-		var camera = new THREE.PerspectiveCamera( 75, element.attr("width") / element.attr("height"), 0.1, 1000 );
+		var camera = new THREE.PerspectiveCamera( 75, element.attr("width") / element.attr("height") || 1, 0.1, 1000 );
 		var renderer = new THREE.WebGLRenderer();
 		
 		element.append(renderer.domElement)
@@ -52,15 +52,15 @@ angular.module('charlierproctor.angular-planets', []).
 
 				// update the planets position
 				planet.planet.position.set(
-					element.attr("scale") * planet.orbitalRadius * Math.cos(theta),
-					element.attr("scale") * planet.orbitalRadius * Math.sin(theta),
+					element.attr("scale") * planet.orbitalRadius * Math.cos(theta) || 0,
+					element.attr("scale") * planet.orbitalRadius * Math.sin(theta) || 0,
 					0)
 			})
 
 			renderer.render( scope.scene, camera );
 
 			// attrs.speed years passes every second, assuming 60 fps
-			years += element.attr("speed")/60;
+			years += element.attr("speed")/60 || 0;
 		}
 		render();
   	}

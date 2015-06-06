@@ -10,7 +10,7 @@
 </head>
 <body ng-app="ngPlanetsDemo">
 	<div ng-controller="AppCtrl">
-		<ng-planets height="{{height}}" width="{{width}}" speed="1" scale="25">
+		<ng-planets height="{{height}}" width="{{width}}" speed="{{speed}}" scale="{{scale}}">
 		<!-- speed is years / second. scale is pixels / AU.  -->
 			<ng-planet color="0xFF0000" planet-radius="10" orbital-radius="0"></ng-planet>
 			<ng-planet color="0xE0E0E0" planet-radius="10" orbital-radius="0.5"></ng-planet>
