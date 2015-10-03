@@ -1,17 +1,18 @@
 {
   "name": "angular-planets",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "authors": [
     "Charlie Proctor <charlie@charlieproctor.com>"
   ],
-  "main": "directive.js",
+  "main": "angular-planets.js",
   "license": "MIT",
   "ignore": [
     "**/.*",
     "node_modules",
     "bower_components",
     "test",
-    "tests"
+    "tests",
+    "**/*.gif"
   ],
   "dependencies": {
     "angular": "~1.4.0",
