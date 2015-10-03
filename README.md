@@ -10,9 +10,9 @@ An angular directive using `three.js` to create a solar system.
 
 ## Example
 
-![](demo.gif)
+- open up `index.html` for an example
 
-- just open up `index.html`
+![](demo.gif)
 
 ```html
 <ng-planets height="{{height}}" width="{{width}}" speed="{{speed}}" scale="{{scale}}">
